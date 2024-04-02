@@ -27,7 +27,7 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     @Override
-    public Expense editEcpense(Expense expense, Long id) {
+    public Expense editExpense(Expense expense, Long id) {
         return null;
     }
 }
