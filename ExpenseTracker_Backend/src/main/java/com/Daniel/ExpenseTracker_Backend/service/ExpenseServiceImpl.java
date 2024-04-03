@@ -1,5 +1,6 @@
 package com.Daniel.ExpenseTracker_Backend.service;
 
+import com.Daniel.ExpenseTracker_Backend.controller.exception.ExpenseNotFoundException;
 import com.Daniel.ExpenseTracker_Backend.model.Expense;
 import com.Daniel.ExpenseTracker_Backend.model.ExpenseType;
 import com.Daniel.ExpenseTracker_Backend.repository.ExpenseRepository;
@@ -31,7 +32,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public Expense getExpenseById(Long id) {
-        return null;
+        return expenseRepository.findById(id)
+                .orElseThrow(()->new ExpenseNotFoundException(id));
     }
 
     @Override

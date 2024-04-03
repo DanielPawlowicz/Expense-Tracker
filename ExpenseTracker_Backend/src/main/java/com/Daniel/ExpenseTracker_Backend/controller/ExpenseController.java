@@ -32,6 +32,11 @@ public class ExpenseController {
         return expenseService.getExpensesByType(expenseType);
     }
 
+    @GetMapping("expense/{id}")
+    public ResponseEntity<?> getExpensesByType(@PathVariable Long id) {
+        return new ResponseEntity<>(expenseService.getExpenseById(id), HttpStatus.OK);
+    }
+
 
 
 }
