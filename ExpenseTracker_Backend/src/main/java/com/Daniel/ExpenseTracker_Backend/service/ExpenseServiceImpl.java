@@ -64,10 +64,16 @@ public class ExpenseServiceImpl implements ExpenseService{
         return expenseRepository.findByExpenseType(expenseType);
     }
 
-    // get expense by date
+    // get expenses by date
     public List<Expense> getExpensesByDate(LocalDate expenseDate) {
         return expenseRepository.findByExpenseDate(expenseDate);
     }
+
+    // get expenses in date range
+    public List<Expense> getExpensesByDateRange(LocalDate startDate, LocalDate endDate) {
+        return expenseRepository.findByExpenseDateBetween(startDate, endDate);
+    }
+
 
 
 

@@ -55,20 +55,27 @@ public class ExpenseController {
 
 // OTHER
 
-    // get expense by type
+    // get expenses by type
     @GetMapping("expensesByType")
     public List<Expense> getExpensesByType(@RequestParam("type") ExpenseType expenseType) {
         return expenseService.getExpensesByType(expenseType);
     }
 
-    // get expense by date
+    // get expenses by date
     @GetMapping("/expensesByDate")
     public List<Expense> getExpensesByDate(@RequestParam("date") String date) {
         LocalDate expenseDate = LocalDate.parse(date);
         return expenseService.getExpensesByDate(expenseDate);
     }
 
-
+    // get expenses in date range
+    @GetMapping("/expensesByDateRange")
+    public List<Expense> getExpensesByDateRange(@RequestParam("startDate") String startDate,
+                                                @RequestParam("endDate") String endDate) {
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        return expenseService.getExpensesByDateRange(start, end);
+    }
 
 
 }
