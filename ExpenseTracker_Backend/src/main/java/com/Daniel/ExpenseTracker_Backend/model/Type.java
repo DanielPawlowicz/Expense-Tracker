@@ -2,7 +2,7 @@ package com.Daniel.ExpenseTracker_Backend.model;
 
 import jakarta.persistence.Entity;
 
-@Entity
+//@Entity
 public enum Type {
     HOUSING,
     UTILITIES,
