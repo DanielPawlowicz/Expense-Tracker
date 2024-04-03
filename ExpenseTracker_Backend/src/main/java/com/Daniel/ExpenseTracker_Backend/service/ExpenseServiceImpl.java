@@ -38,7 +38,11 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public String deleteExpense(Long id) {
-        return null;
+        if(!expenseRepository.existsById(id)){
+            throw new ExpenseNotFoundException(id);
+        }
+        expenseRepository.deleteById(id);
+        return "Expense with id " + id + " deleted successfully";
     }
 
     @Override
