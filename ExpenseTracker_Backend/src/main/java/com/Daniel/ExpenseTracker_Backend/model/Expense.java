@@ -4,8 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.time.LocalDate;
 
-import java.util.Date;
+//import java.util.Date;
 
 @Entity
 public class Expense {
@@ -15,7 +16,7 @@ public class Expense {
     private Long id;
     private Double expenseValue;
     private String description;
-    private Date expenseDate;
+    private LocalDate expenseDate;
     private String expenseType;
 
     public Long getId() {
@@ -42,11 +43,11 @@ public class Expense {
         this.description = description;
     }
 
-    public Date getExpenseDate() {
+    public LocalDate getExpenseDate() {
         return expenseDate;
     }
 
-    public void setExpenseDate(Date expenseDate) {
+    public void setExpenseDate(LocalDate expenseDate) {
         this.expenseDate = expenseDate;
     }
 
