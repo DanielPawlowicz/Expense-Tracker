@@ -42,6 +42,10 @@ public class ExpenseController {
         return new ResponseEntity<>(expenseService.deleteExpense(id), HttpStatus.OK);
     }
 
+    @PutMapping("editExpense/{id}")
+    public ResponseEntity<?> editExpense(@RequestBody Expense newExpense, @PathVariable Long id){
+        return new ResponseEntity<>(expenseService.editExpense(newExpense, id), HttpStatus.OK);
+    }
 
 
 }
