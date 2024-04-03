@@ -1,9 +1,6 @@
 package com.Daniel.ExpenseTracker_Backend.model;
 
-import jakarta.persistence.Entity;
-
-//@Entity
-public enum Type {
+public enum ExpenseType {
     HOUSING,
     UTILITIES,
     FOOD,

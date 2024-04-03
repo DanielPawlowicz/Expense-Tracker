@@ -17,7 +17,7 @@ public class Expense {
     private Double expenseValue;
     private String description;
     private LocalDate expenseDate;
-    private String expenseType;
+    private ExpenseType expenseType;
 
     public Long getId() {
         return id;
@@ -51,11 +51,11 @@ public class Expense {
         this.expenseDate = expenseDate;
     }
 
-    public String getExpenseType() {
+    public ExpenseType getExpenseType() {
         return expenseType;
     }
 
-    public void setExpenseType(String expenseType) {
+    public void setExpenseType(ExpenseType expenseType) {
         this.expenseType = expenseType;
     }
 }
