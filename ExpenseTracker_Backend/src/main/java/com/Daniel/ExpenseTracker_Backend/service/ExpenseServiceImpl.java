@@ -1,6 +1,7 @@
 package com.Daniel.ExpenseTracker_Backend.service;
 
 import com.Daniel.ExpenseTracker_Backend.model.Expense;
+import com.Daniel.ExpenseTracker_Backend.model.ExpenseType;
 import com.Daniel.ExpenseTracker_Backend.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,11 @@ public class ExpenseServiceImpl implements ExpenseService{
     @Override
     public List<Expense> getAllExpense() {
         return expenseRepository.findAll();
+    }
+
+    // Get expenses by type
+    public List<Expense> getExpensesByType(ExpenseType expenseType) {
+        return expenseRepository.findByExpenseType(expenseType);
     }
 
     @Override
