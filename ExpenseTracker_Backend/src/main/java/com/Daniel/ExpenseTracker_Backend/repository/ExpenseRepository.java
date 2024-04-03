@@ -20,4 +20,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     // get expenses in date range
     List<Expense> findByExpenseDateBetween(LocalDate startDate, LocalDate endDate);
 
+    // get all expenses sorted by date (newest to oldest)
+    List<Expense> findAllByOrderByExpenseDateDesc();
+
 }

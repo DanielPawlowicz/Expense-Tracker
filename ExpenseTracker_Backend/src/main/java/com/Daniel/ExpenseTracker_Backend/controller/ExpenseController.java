@@ -28,7 +28,7 @@ public class ExpenseController {
     }
 
     // get all expenses
-    @GetMapping("/allExpense")
+    @GetMapping("/allExpenses")
     public ResponseEntity<?> getAllExpense(){
         return new ResponseEntity<>(expenseService.getAllExpense(), HttpStatus.OK);
     }
@@ -75,6 +75,12 @@ public class ExpenseController {
         LocalDate start = LocalDate.parse(startDate);
         LocalDate end = LocalDate.parse(endDate);
         return expenseService.getExpensesByDateRange(start, end);
+    }
+
+    // get all expenses sorted by date (newest to oldest)
+    @GetMapping("/allExpensesOrdered")
+    public List<Expense> getAllExpensesByDate() {
+        return expenseService.getAllByDateDesc();
     }
 
 
