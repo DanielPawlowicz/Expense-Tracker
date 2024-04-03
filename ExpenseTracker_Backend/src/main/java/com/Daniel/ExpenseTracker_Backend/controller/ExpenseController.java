@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +22,12 @@ public class ExpenseController {
     public ResponseEntity<?> newExpense(@RequestBody Expense expense){
         return new ResponseEntity<>(expenseService.saveExpense(expense), HttpStatus.CREATED);
     }
+
+    @GetMapping("/allExpense")
+    public ResponseEntity<?> getAllExpense(){
+        return new ResponseEntity<>(expenseService.getAllExpense(), HttpStatus.OK);
+    }
+
+
 
 }

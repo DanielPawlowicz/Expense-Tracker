@@ -20,7 +20,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public List<Expense> getAllExpense() {
-        return null;
+        return expenseRepository.findAll();
     }
 
     @Override
