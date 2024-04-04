@@ -60,7 +60,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     // Get expenses by type
     public List<Expense> getExpensesByType(ExpenseType expenseType) {
-        return expenseRepository.findByExpenseType(expenseType);
+        return expenseRepository.findByExpenseTypeOrderByExpenseDateDesc(expenseType);
     }
 
     // get expenses by date
@@ -70,7 +70,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     // get expenses in date range
     public List<Expense> getExpensesByDateRange(LocalDate startDate, LocalDate endDate) {
-        return expenseRepository.findByExpenseDateBetween(startDate, endDate);
+        return expenseRepository.findByExpenseDateBetweenOrderByExpenseDateDesc(startDate, endDate);
     }
 
     // get all expenses sorted by date (newest to oldest)

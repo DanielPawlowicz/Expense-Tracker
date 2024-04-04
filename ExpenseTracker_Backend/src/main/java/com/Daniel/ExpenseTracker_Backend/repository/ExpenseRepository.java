@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
-    // get expenses by type
-    List<Expense> findByExpenseType(ExpenseType expenseType);
+    // get expenses by type  -ordered by date desc
+    List<Expense> findByExpenseTypeOrderByExpenseDateDesc(ExpenseType expenseType);
 
     // get expenses by date
     List<Expense> findByExpenseDate(LocalDate expenseDate);
 
-    // get expenses in date range
-    List<Expense> findByExpenseDateBetween(LocalDate startDate, LocalDate endDate);
+    // get expenses in date range  -ordered by date desc
+    List<Expense> findByExpenseDateBetweenOrderByExpenseDateDesc(LocalDate startDate, LocalDate endDate);
 
     // get all expenses sorted by date (newest to oldest)
     List<Expense> findAllByOrderByExpenseDateDesc();
