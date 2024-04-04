@@ -127,5 +127,13 @@ public class ExpenseController {
         return new ResponseEntity<>(summaryValue, HttpStatus.OK);
     }
 
-    
+    // get the value from specific month
+    @GetMapping("/expensesSpecificMonthSummary")
+    public ResponseEntity<Double> getSummaryValueOfExpensesFromBeginningOfMonth(
+            @RequestParam("month") int month,
+            @RequestParam("year") int year) {
+        double summaryValue = expenseService.getSummaryValueOfExpensesFromBeginningOfMonth(month, year);
+        return new ResponseEntity<>(summaryValue, HttpStatus.OK);
+    }
+
 }

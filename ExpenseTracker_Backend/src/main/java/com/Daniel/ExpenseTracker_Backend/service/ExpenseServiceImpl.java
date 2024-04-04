@@ -113,4 +113,15 @@ public class ExpenseServiceImpl implements ExpenseService{
         return summaryValue;
     }
 
+    // get the value from specific month
+    public double getSummaryValueOfExpensesFromBeginningOfMonth(int month, int year) {
+        LocalDate startOfMonth = LocalDate.of(year, month, 1);
+        LocalDate endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
+        List<Expense> expenses = expenseRepository.findByExpenseDateBetween(startOfMonth, endOfMonth);
+        double summaryValue = expenses.stream()
+                .mapToDouble(Expense::getExpenseValue)
+                .sum();
+        return summaryValue;
+    }
+
 }
