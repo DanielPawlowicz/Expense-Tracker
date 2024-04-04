@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.time.temporal.ChronoUnit;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService{
@@ -86,6 +87,12 @@ public class ExpenseServiceImpl implements ExpenseService{
     // get expenses by date Range and specific type  -ordered by date desc
     public List<Expense> getExpensesWithinDateRangeAndType(LocalDate startDate, LocalDate endDate, ExpenseType expenseType) {
         return expenseRepository.findByExpenseDateBetweenAndExpenseTypeOrderByExpenseDateDesc(startDate, endDate, expenseType);
+    }
+
+    // Get expenses from the last X days  -ordered by date desc
+    public List<Expense> getExpensesFromLastXDaysOrderedByDateDesc(int days) {
+        LocalDate startDate = LocalDate.now().minus(days, ChronoUnit.DAYS);
+        return expenseRepository.findByExpenseDateAfterOrderByExpenseDateDesc(startDate);
     }
 
 }

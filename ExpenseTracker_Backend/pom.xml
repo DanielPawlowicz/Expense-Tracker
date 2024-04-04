@@ -36,6 +36,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.jtransc</groupId>
+			<artifactId>jtransc-rt</artifactId>
+			<version>0.6.7</version>
+		</dependency>
 	</dependencies>
 
 	<build>
