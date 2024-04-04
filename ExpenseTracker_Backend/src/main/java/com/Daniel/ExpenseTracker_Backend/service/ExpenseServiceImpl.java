@@ -121,4 +121,15 @@ public class ExpenseServiceImpl implements ExpenseService{
         return summaryValue;
     }
 
+    public List<Expense> getExpensesFromBeginningOfMonth() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfMonth = LocalDate.of(today.getYear(), today.getMonth(), 1);
+        List<Expense> expenses = expenseRepository.findByExpenseDateAfterOrExpenseDateIs(startOfMonth, startOfMonth);
+
+        // Sortujemy wydatki malejąco według daty
+        expenses.sort((e1, e2) -> e2.getExpenseDate().compareTo(e1.getExpenseDate()));
+
+        return expenses;
+    }
+
 }
