@@ -48,4 +48,5 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     // get expenses from this month
     List<Expense> findByExpenseDateAfterOrExpenseDateIs(LocalDate date1, LocalDate date2);
 
+
 }

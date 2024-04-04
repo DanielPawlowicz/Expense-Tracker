@@ -121,6 +121,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         return summaryValue;
     }
 
+    // get expenses from this month
     public List<Expense> getExpensesFromBeginningOfMonth() {
         LocalDate today = LocalDate.now();
         LocalDate startOfMonth = LocalDate.of(today.getYear(), today.getMonth(), 1);
@@ -130,6 +131,13 @@ public class ExpenseServiceImpl implements ExpenseService{
         expenses.sort((e1, e2) -> e2.getExpenseDate().compareTo(e1.getExpenseDate()));
 
         return expenses;
+    }
+
+    // get expenses from specific month and year
+    public List<Expense> getExpensesByMonthAndYear(int year, int month) {
+        LocalDate startOfMonth = LocalDate.of(year, month, 1);
+        LocalDate endOfMonth = startOfMonth.plusMonths(1).minusDays(1);
+        return expenseRepository.findByExpenseDateBetweenOrderByExpenseDateDesc(startOfMonth, endOfMonth);
     }
 
 }

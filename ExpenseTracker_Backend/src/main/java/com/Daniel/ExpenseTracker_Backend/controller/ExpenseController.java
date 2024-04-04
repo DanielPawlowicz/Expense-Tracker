@@ -136,6 +136,7 @@ public class ExpenseController {
         return new ResponseEntity<>(summaryValue, HttpStatus.OK);
     }
 
+    // get expenses from this month
     @GetMapping("/expensesFromThisMonth")
     public ResponseEntity<List<Expense>> getExpensesFromCurrentMonth() {
         List<Expense> expenses = expenseService.getExpensesFromBeginningOfMonth();
