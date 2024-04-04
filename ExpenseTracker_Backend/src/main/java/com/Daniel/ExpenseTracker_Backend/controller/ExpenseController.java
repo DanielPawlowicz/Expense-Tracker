@@ -110,4 +110,13 @@ public class ExpenseController {
         List<Expense> expenses = expenseService.getExpensesFromLastXDaysOrderedByDateDesc(days);
         return new ResponseEntity<>(expenses, HttpStatus.OK);
     }
+
+    // Get expenses from the last X days and specific type  -ordered by date desc;
+    @GetMapping("/expensesFromLastXDaysAndType")
+    public ResponseEntity<List<Expense>> getExpensesFromLastXDaysAndType(
+            @RequestParam("days") int days,
+            @RequestParam("type") ExpenseType type) {
+        List<Expense> expenses = expenseService.getExpensesFromLastXDaysAndType(days, type);
+        return new ResponseEntity<>(expenses, HttpStatus.OK);
+    }
 }

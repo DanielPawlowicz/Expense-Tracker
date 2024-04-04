@@ -95,4 +95,10 @@ public class ExpenseServiceImpl implements ExpenseService{
         return expenseRepository.findByExpenseDateAfterOrderByExpenseDateDesc(startDate);
     }
 
+    // Get expenses from the last X days and specific type  -ordered by date desc;
+    public List<Expense> getExpensesFromLastXDaysAndType(int days, ExpenseType type) {
+        LocalDate startDate = LocalDate.now().minus(days, ChronoUnit.DAYS);
+        return expenseRepository.findByExpenseDateAfterAndExpenseType(startDate, type);
+    }
+
 }
