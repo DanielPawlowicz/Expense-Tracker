@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
 
@@ -99,6 +100,17 @@ public class ExpenseServiceImpl implements ExpenseService{
     public List<Expense> getExpensesFromLastXDaysAndType(int days, ExpenseType type) {
         LocalDate startDate = LocalDate.now().minus(days, ChronoUnit.DAYS);
         return expenseRepository.findByExpenseDateAfterAndExpenseType(startDate, type);
+    }
+
+    // get expenses value from this month
+    public double getSummaryValueOfExpensesFromBeginningOfMonth() {
+        LocalDate today = LocalDate.now();
+        LocalDate startOfMonth = YearMonth.from(today).atDay(1);
+        List<Expense> expenses = expenseRepository.findByExpenseDateAfter(startOfMonth);
+        double summaryValue = expenses.stream()
+                .mapToDouble(Expense::getExpenseValue)
+                .sum();
+        return summaryValue;
     }
 
 }

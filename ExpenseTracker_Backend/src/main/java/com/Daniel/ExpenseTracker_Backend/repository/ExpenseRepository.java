@@ -37,4 +37,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     // Get expenses from the last X days and specific type  -ordered by date desc;
     List<Expense> findByExpenseDateAfterAndExpenseType(LocalDate startDate, ExpenseType expenseType);
 
+    // Get expenses after a specific date (this month)
+    List<Expense> findByExpenseDateAfter(LocalDate date);
+
 }

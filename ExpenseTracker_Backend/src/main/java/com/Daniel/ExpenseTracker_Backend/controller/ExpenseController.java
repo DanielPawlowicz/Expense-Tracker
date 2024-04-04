@@ -119,4 +119,13 @@ public class ExpenseController {
         List<Expense> expenses = expenseService.getExpensesFromLastXDaysAndType(days, type);
         return new ResponseEntity<>(expenses, HttpStatus.OK);
     }
+
+    // get expenses value from this month
+    @GetMapping("/expensesThisMonthSummary")
+    public ResponseEntity<Double> getSummaryValueOfExpensesFromBeginningOfMonth() {
+        double summaryValue = expenseService.getSummaryValueOfExpensesFromBeginningOfMonth();
+        return new ResponseEntity<>(summaryValue, HttpStatus.OK);
+    }
+
+    
 }
