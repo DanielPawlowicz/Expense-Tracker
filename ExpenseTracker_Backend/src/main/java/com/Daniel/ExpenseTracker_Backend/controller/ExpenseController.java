@@ -93,4 +93,13 @@ public class ExpenseController {
         return new ResponseEntity<>(expenses, HttpStatus.OK);
     }
 
+    // get expenses by date Range and specific type  -ordered by date desc
+    @GetMapping("/expensesByDateRangeAndTypeOrdered")
+    public ResponseEntity<List<Expense>> getExpensesWithinDateRangeAndType(
+            @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam("type") ExpenseType type) {
+        List<Expense> expenses = expenseService.getExpensesWithinDateRangeAndType(startDate, endDate, type);
+        return new ResponseEntity<>(expenses, HttpStatus.OK);
+    }
 }

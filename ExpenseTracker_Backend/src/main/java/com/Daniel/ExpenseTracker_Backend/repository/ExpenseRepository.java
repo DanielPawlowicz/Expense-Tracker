@@ -28,4 +28,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     @Query("SELECT e FROM Expense e WHERE e.expenseDate = ?1 AND e.expenseType = ?2 ORDER BY e.expenseDate DESC")
     List<Expense> findByExpenseDateAndExpenseType(LocalDate expenseDate, ExpenseType expenseType);
 
+    // get expenses by date Range and specific type  -ordered by date desc
+    List<Expense> findByExpenseDateBetweenAndExpenseTypeOrderByExpenseDateDesc(LocalDate startDate, LocalDate endDate, ExpenseType expenseType);
+
 }
