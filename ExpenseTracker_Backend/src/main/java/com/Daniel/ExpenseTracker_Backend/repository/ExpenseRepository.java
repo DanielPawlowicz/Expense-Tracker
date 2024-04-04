@@ -4,6 +4,7 @@ import com.Daniel.ExpenseTracker_Backend.model.Expense;
 import com.Daniel.ExpenseTracker_Backend.model.ExpenseType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -38,7 +39,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByExpenseDateAfterAndExpenseType(LocalDate startDate, ExpenseType expenseType);
 
     // Get expenses after a specific date (this month)
-    List<Expense> findByExpenseDateAfter(LocalDate date);
+    @Query("SELECT SUM(e.expenseValue) FROM Expense e WHERE e.expenseDate >= :startDate")
+    Double getSummaryValueOfExpensesFromBeginningOfMonth(@Param("startDate") LocalDate startDate);
 
     // get the value from specific month
     List<Expense> findByExpenseDateBetween(LocalDate startOfMonth, LocalDate endOfMonth);

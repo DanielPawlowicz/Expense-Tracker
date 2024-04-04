@@ -105,12 +105,9 @@ public class ExpenseServiceImpl implements ExpenseService{
     // get expenses value from this month
     public double getSummaryValueOfExpensesFromBeginningOfMonth() {
         LocalDate today = LocalDate.now();
-        LocalDate startOfMonth = YearMonth.from(today).atDay(1);
-        List<Expense> expenses = expenseRepository.findByExpenseDateAfter(startOfMonth);
-        double summaryValue = expenses.stream()
-                .mapToDouble(Expense::getExpenseValue)
-                .sum();
-        return summaryValue;
+        LocalDate startOfMonth = LocalDate.of(today.getYear(), today.getMonth(), 1);
+        Double summaryValue = expenseRepository.getSummaryValueOfExpensesFromBeginningOfMonth(startOfMonth);
+        return summaryValue != null ? summaryValue : 0.0;
     }
 
     // get the value from specific month
