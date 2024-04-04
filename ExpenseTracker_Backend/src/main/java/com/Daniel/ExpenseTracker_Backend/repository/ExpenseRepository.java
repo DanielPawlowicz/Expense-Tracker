@@ -3,6 +3,7 @@ package com.Daniel.ExpenseTracker_Backend.repository;
 import com.Daniel.ExpenseTracker_Backend.model.Expense;
 import com.Daniel.ExpenseTracker_Backend.model.ExpenseType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -22,5 +23,9 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     // get all expenses sorted by date (newest to oldest)
     List<Expense> findAllByOrderByExpenseDateDesc();
+
+    // Get expenses by specific date and type ordered by date desc
+    @Query("SELECT e FROM Expense e WHERE e.expenseDate = ?1 AND e.expenseType = ?2 ORDER BY e.expenseDate DESC")
+    List<Expense> findByExpenseDateAndExpenseType(LocalDate expenseDate, ExpenseType expenseType);
 
 }

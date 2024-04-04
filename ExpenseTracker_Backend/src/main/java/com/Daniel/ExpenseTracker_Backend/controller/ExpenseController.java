@@ -4,6 +4,7 @@ import com.Daniel.ExpenseTracker_Backend.model.Expense;
 import com.Daniel.ExpenseTracker_Backend.model.ExpenseType;
 import com.Daniel.ExpenseTracker_Backend.service.ExpenseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -55,20 +56,20 @@ public class ExpenseController {
 
 // OTHER
 
-    // get expenses by type
-    @GetMapping("expensesByType")
+    // get expenses by type  -ordered by date desc
+    @GetMapping("expensesByTypeOrdered")
     public List<Expense> getExpensesByType(@RequestParam("type") ExpenseType expenseType) {
         return expenseService.getExpensesByType(expenseType);
     }
 
     // get expenses by date
-    @GetMapping("/expensesByDate")
+    @GetMapping("/expensesByDateOrdered")
     public List<Expense> getExpensesByDate(@RequestParam("date") String date) {
         LocalDate expenseDate = LocalDate.parse(date);
         return expenseService.getExpensesByDate(expenseDate);
     }
 
-    // get expenses in date range
+    // get expenses in date range  -ordered by date desc
     @GetMapping("/expensesByDateRange")
     public List<Expense> getExpensesByDateRange(@RequestParam("startDate") String startDate,
                                                 @RequestParam("endDate") String endDate) {
@@ -83,5 +84,13 @@ public class ExpenseController {
         return expenseService.getAllByDateDesc();
     }
 
+    // Get expenses by specific date and type   -ordered by date desc
+    @GetMapping("/expensesByDateAndTypeOrdered")
+    public ResponseEntity<List<Expense>> getExpensesByDateAndType(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam("type") ExpenseType type) {
+        List<Expense> expenses = expenseService.getExpensesByDateAndType(date, type);
+        return new ResponseEntity<>(expenses, HttpStatus.OK);
+    }
 
 }
