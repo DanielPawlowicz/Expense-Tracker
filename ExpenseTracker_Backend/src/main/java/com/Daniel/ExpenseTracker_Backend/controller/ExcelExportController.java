@@ -76,7 +76,7 @@ public class ExcelExportController {
                 .contentLength(excelData.length)
                 .body(resource);
     }
-    
+
 //    @GetMapping("/export")
 //    public ResponseEntity<Object> exportToExcel() throws IOException {
 //        String filePath = "expenses.xlsx"; // Ścieżka do wygenerowanego pliku Excel
