@@ -14,6 +14,11 @@ class ExpenseService {
         return axios.get(API_URL + "/allExpensesOrdered");
     }
 
+    // Get expenses value from specific month
+    getSpecificMonthValue(m, y){
+        return axios.get(API_URL + `expensesSpecificMonthSummary?month=${m}&year=${y}`)
+    }
+
 }
 
 export default new ExpenseService;

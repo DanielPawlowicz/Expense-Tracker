@@ -45,12 +45,16 @@ const MainList = () => {
             const month = getMonthName(expenseDate.getMonth() + 1); // Adding 1 to get the correct month index
             const day = expenseDate.getDate(); // Get day number
             if (!groupedExpenses[month]) {
-                groupedExpenses[month] = {};
+                groupedExpenses[month] = {
+                    totalValue: 0,
+                    days: {}
+                };
             }
-            if (!groupedExpenses[month][day]) {
-                groupedExpenses[month][day] = [];
+            if (!groupedExpenses[month].days[day]) {
+                groupedExpenses[month].days[day] = [];
             }
-            groupedExpenses[month][day].push(expense);
+            groupedExpenses[month].days[day].push(expense);
+            groupedExpenses[month].totalValue += expense.expenseValue;
         });
         return groupedExpenses;
     };
@@ -58,10 +62,11 @@ const MainList = () => {
     // expenses grouped by month and day
     const renderExpensesByMonthAndDay = () => {
         const groupedExpenses = groupExpensesByMonthAndDay();
-        return Object.entries(groupedExpenses).map(([month, days]) => (
+        return Object.entries(groupedExpenses).map(([month, data]) => (
             <div key={month}>
-                <h2>{month}</h2>
-                {Object.entries(days)
+                <h2 className='month-name'>{month} </h2>
+                <h3 className='month-value'>{data.totalValue}</h3>
+                {Object.entries(data.days)
                     .sort(([a], [b]) => b - a) // Sort the days in descending order
                     .map(([day, expenses]) => (
                         <div key={day}>
@@ -91,16 +96,16 @@ const MainList = () => {
     <>
         <div className='container'>
 
-            <h1>Expense Tracker</h1>
+            <h2 className='title'>Expense Tracker</h2>
 
             <div className='panel left-panel controls'>
-
+                {/* <p>ajdfssssssssssssssssssssssssssssssssssk</p> */}
             </div>
 
             <div className='panel right-panel content'>
 
                 <div className="balance">
-                    <h1>{thisMBalance}</h1>
+                    <h1 className='this-month-balance'>{thisMBalance}</h1>
                 </div>
 
                 <div className='new-expense'>
