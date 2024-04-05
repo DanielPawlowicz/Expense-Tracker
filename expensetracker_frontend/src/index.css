@@ -75,6 +75,42 @@ code {
 }
 
 
+.notification {
+  position: fixed;
+  top: 40vh;
+  width: 300px;
+  right: 750px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.35);
+  padding: 50px 40px;
+  /* height: 200px; */
+  /* right: 10px; */
+  background-color: #eee;
+  border: 1px solid #ddd;
+  color: green;
+  border-radius: 5px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+}
+
+.show {
+display: block;
+opacity: 1;
+}
+
+.edit{
+  background-color: #05AD1B !important;
+  width: 200px;
+}
+
+input{
+  font-weight: bold;
+}
 
 
 
@@ -148,9 +184,9 @@ td {
 }
 
 tr:hover{
-  background-color: #deedde;
+  background-color: #dedede;
 }
 
-/* tr:hover .icon{
-  color: #999;
-} */
+.icnbtn:hover .icon{
+  color: #333;
+}

@@ -29,6 +29,11 @@ class ExpenseService {
         return axios.post(API_URL + "/addExpense", expense);
     }
 
+    //Edit expense
+    editExpense(id, expense){
+        return axios.put(API_URL + "/editExpense/" + id, expense)
+    }
+
 }
 
 export default new ExpenseService;

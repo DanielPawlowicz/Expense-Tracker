@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ExpenseService from '../service/ExpenseService';
 import { IconButton } from '@mui/material';
 // icons
@@ -22,6 +22,10 @@ const MainList = () => {
 
     const [thisMBalance, setThisMBalance] = useState(0);
     const [allExpensesList, setAllExpensesList] = useState([]);
+    const [editedExpense, setEditedExpense] = useState(null); // State to hold the edited expense details
+    const formRef = useRef(null); // Ref for the form element
+
+
 
     // fetch the balance from this month when site is loading
     useEffect(() => {
@@ -124,16 +128,60 @@ const MainList = () => {
         const expenseType = formData.get('expenseType');
         console.log({expenseValue, description, expenseDate, expenseType});
 
-        ExpenseService.saveExpense({expenseValue, description, expenseDate, expenseType})
-            .then(() => {
-                console.log('Expense registered successfully');
-                getBalance();
-                getAllExpenses();
-            })
-            .catch((error) => {
-                console.error('Error registering expense:', error);
-            });
+        if (editedExpense) {
+            // If an expense is being edited, call editExpense instead of saveExpense
+            ExpenseService.editExpense(editedExpense.id, {expenseValue, description, expenseDate, expenseType})
+                .then(() => {
+                    console.log('Expense edited successfully');
+                    showNotification(`Expense edited\nsuccessfully`);
+                    setEditedExpense(null); // Reset editedExpense state
+                    getBalance();
+                    getAllExpenses();
+
+                    if (formRef.current) {
+                        formRef.current.reset();
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error editing expense:', error);
+                });
+        } else {
+            ExpenseService.saveExpense({expenseValue, description, expenseDate, expenseType})
+                .then(() => {
+                    console.log('Expense registered successfully');
+                    showNotification(`Expense added\nsuccessfully`);
+                    getBalance();
+                    getAllExpenses();
+                })
+                .catch((error) => {
+                    console.error('Error registering expense:', error);
+                });
+        }   
     }
+
+    const editExpense = (expense) => {
+        setEditedExpense(expense); // Set the expense to be edited
+        // Populate form fields with the selected expense details
+        document.getElementById('expenseValue').value = expense.expenseValue;
+        document.getElementById('description').value = expense.description;
+        document.getElementById('expenseDate').value = expense.expenseDate;
+        document.getElementById('expenseType').value = expense.expenseType;
+    };
+
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.classList.add('show');
+    
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 1500); // Adjust the timeout duration as needed (in milliseconds)
+    }
+
+
+
+
+// RENDER
 
     // expenses grouped by month and day
     const renderExpensesByMonthAndDay = () => {
@@ -154,7 +202,7 @@ const MainList = () => {
                                             <td className='e-type'>{getExpenseIcon(exp.expenseType)}</td>
                                             <td className='e-descr'>{exp.description}</td>
                                             <td className='controls'>
-                                                <IconButton className='icnbtn'>
+                                                <IconButton className='icnbtn' onClick={() => editExpense(exp)}>
                                                     <EditNoteIcon className='icon' />
                                                 </IconButton>
                                                 
@@ -182,11 +230,14 @@ const MainList = () => {
             <div className="heading">
                 <div className='new-expense'>
                     {/* <p>New Expense</p> */}
-                    <form onSubmit={expenseSave}>
-                        <label>Value: <input name="expenseValue" type='number' step='0.01'/></label>
-                        <label>Description: <input name="description" type='text' /></label>
-                        <label>Date: <input name="expenseDate" type='date'  defaultValue={new Date().toISOString().split('T')[0]} /></label>
-                        <label>Type: <select name="expenseType">
+
+                    <div id="notification" class="notification"></div>
+
+                    <form ref={formRef} onSubmit={expenseSave}>
+                        <label>Value: <input id="expenseValue" name="expenseValue" type='number' step='0.01'/></label>
+                        <label>Description: <input id="description" name="description" type='text' /></label>
+                        <label>Date: <input id="expenseDate" name="expenseDate" type='date'  defaultValue={new Date().toISOString().split('T')[0]} /></label>
+                        <label>Type: <select id="expenseType" name="expenseType">
                                 <option value="PERSONAL">Personal</option>
                                 <option value="FOOD">Food</option>
                                 <option value="HOUSING">Housing</option>
@@ -197,7 +248,7 @@ const MainList = () => {
                                 <option value="OTHER">Other</option>
                             </select>
                         </label>
-                        <button className='submit'>Add</button>
+                        <button className={editedExpense ? 'submit edit' : 'submit'}>{editedExpense ? 'Save Changes' : 'Add'}</button>
                     </form>
                 </div>
 
