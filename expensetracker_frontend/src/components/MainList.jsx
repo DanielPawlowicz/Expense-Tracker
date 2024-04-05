@@ -77,6 +77,7 @@ const MainList = () => {
                                             <td className='e-value'><b>{exp.expenseValue} </b><span>zł</span></td>
                                             <td className='e-descr'>{exp.description}</td>
                                             <td className='e-type'>{exp.expenseType}</td>
+                                            <td className='controls'></td>
                                         </tr>
                                     ))}
                                 </tbody>

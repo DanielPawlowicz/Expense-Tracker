@@ -69,6 +69,7 @@ code {
 .month-name{
   color: #333;
   font-size: 2rem;
+  padding: 25px 0;
 }
 
 .monthly-value{
@@ -82,15 +83,26 @@ code {
 .day-name{
   margin-left: 35px;
   color: #444;
+  margin-top: 10px;
 }
 
 table{
-  padding-left: 70px;
+  padding-left: 100px;
   border-collapse: separate;
   width: 800px;
+  border-bottom: 0.5px solid #ddd;
 }
 
 td {
   display: inline-block;
-  margin: 10px 5px;
+  margin: 10px 15px;
+}
+
+.e-value{
+  width: 70px;
+}
+
+.e-descr{
+  width: 400px;
+  word-wrap: break-word;
 }
