@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import ExpenseService from '../service/ExpenseService';
 
 const MainList = () => {
+
+    const [thisMBalance, setThisMBalance] = useState(0);
+
+    useEffect(() => {
+        getBalance();
+    }, []);
+
+    const getBalance = () => {
+        ExpenseService.getThisMonthBalance().then(res => {
+            setThisMBalance(res.data);
+        }).catch(err => {
+            console.error("Error fetching balance: ", err);
+        });
+    };
+
+
   return (
     <>
         <div className='container'>
@@ -14,7 +31,7 @@ const MainList = () => {
             <div className='panel right-panel content'>
 
                 <div className="balance">
-                    <h1></h1>
+                    <h1>{thisMBalance}</h1>
                 </div>
 
                 <div className='new-expense'>
@@ -22,7 +39,7 @@ const MainList = () => {
 
                     </form>
                 </div>
-                
+
                 <div className="expense-list">
 
                 </div>
