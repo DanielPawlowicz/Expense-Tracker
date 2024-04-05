@@ -4,7 +4,7 @@ import ExpenseService from '../service/ExpenseService';
 const MainList = () => {
 
     const [thisMBalance, setThisMBalance] = useState(0);
-    const [allExpenses, setAllExpenses] = useState([]);
+    const [allExpensesList, setAllExpensesList] = useState([]);
 
     // fetch the balance from this month when site is loading
     useEffect(() => {
@@ -24,8 +24,8 @@ const MainList = () => {
     // get all expenses
     const getAllExpenses = () => {
         ExpenseService.getAllExpenses().then((res) => {
-            setAllExpenses(res.data);
-            console.log(allExpenses);
+            setAllExpensesList(res.data);
+            console.log(allExpensesList);
         }).catch((err) => {
             console.error("Error fetching all expenses: ", err);
         });
@@ -56,7 +56,7 @@ const MainList = () => {
 
                 <div className="expense-list">
                     {
-                        
+
                     }
                 </div>
             </div>
