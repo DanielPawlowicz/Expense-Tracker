@@ -101,6 +101,18 @@ const MainList = () => {
         }
     };
 
+    // deleting expense
+    const deleteExpense = async (id) => {
+        try{
+            ExpenseService.deleteExpense(id);
+            getBalance();
+            getAllExpenses();
+            window.location.reload();
+        } catch(err){
+            console.error("Error deleting expense: " + err);
+        }
+    }
+
     // expenses grouped by month and day
     const renderExpensesByMonthAndDay = () => {
         const groupedExpenses = groupExpensesByMonthAndDay();
@@ -124,7 +136,7 @@ const MainList = () => {
                                                     <EditNoteIcon className='icon' />
                                                 </IconButton>
                                                 
-                                                <IconButton className='icnbtn'>
+                                                <IconButton className='icnbtn'onClick={() => deleteExpense(exp.id)} >
                                                     <DeleteIcon className='icon'/>
                                                 </IconButton>
                                                 

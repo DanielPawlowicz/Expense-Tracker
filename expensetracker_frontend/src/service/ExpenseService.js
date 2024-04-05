@@ -19,6 +19,11 @@ class ExpenseService {
         return axios.get(API_URL + `expensesSpecificMonthSummary?month=${m}&year=${y}`)
     }
 
+    // Delete expense
+    deleteExpense(id){
+        return axios.delete(API_URL + "/deleteExpense/"+id)
+    }
+
 }
 
 export default new ExpenseService;
