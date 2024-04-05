@@ -25,7 +25,7 @@ code {
 }
 
 .heading{
-  padding: 30px 0;
+  padding: 10px 0;
   position: sticky;
   top: 0;
   width: 100vw;
@@ -39,14 +39,44 @@ code {
   text-align: center;
 }
 
+.heading > h3{
+  margin-top: 35px;
+}
+
 .heading > h1{
   font-size: 4rem;
-  margin: 0;
+  margin: 10px 0 15px 0;
 }
 
 .heading > h1 span{
   font-size: 2.5rem;
 }
+
+/* form */
+.new-expense{
+  padding: 10px;
+  text-align: center;
+}
+
+.new-expense label{
+  margin: 0 5px 0 20px;
+}
+
+.submit{
+  font-size: 18px;
+  color: white;
+  background-color: #3B9EBE;
+  border: none;
+  padding: 7px;
+  border-radius: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+  width: 80px;
+}
+
+
+
+
 
 .inside-container{
   display: flex;

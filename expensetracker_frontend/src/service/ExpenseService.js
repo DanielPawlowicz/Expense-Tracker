@@ -24,6 +24,11 @@ class ExpenseService {
         return axios.delete(API_URL + "/deleteExpense/"+id)
     }
 
+    // Save expense
+    saveExpense(expense){
+        return axios.post(API_URL + "/addExpense", expense);
+    }
+
 }
 
 export default new ExpenseService;

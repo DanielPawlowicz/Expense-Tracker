@@ -113,6 +113,28 @@ const MainList = () => {
         }
     }
 
+    //save expense
+    const expenseSave = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const expenseValue = formData.get('expenseValue');
+        const description = formData.get('description');
+        const expenseDate = formData.get('expenseDate');
+        const expenseType = formData.get('expenseType');
+        console.log({expenseValue, description, expenseDate, expenseType});
+
+        ExpenseService.saveExpense({expenseValue, description, expenseDate, expenseType})
+            .then(() => {
+                console.log('Expense registered successfully');
+                getBalance();
+                getAllExpenses();
+            })
+            .catch((error) => {
+                console.error('Error registering expense:', error);
+            });
+    }
+
     // expenses grouped by month and day
     const renderExpensesByMonthAndDay = () => {
         const groupedExpenses = groupExpensesByMonthAndDay();
@@ -158,8 +180,30 @@ const MainList = () => {
     <>
         <div className='container'>
             <div className="heading">
+                <div className='new-expense'>
+                    {/* <p>New Expense</p> */}
+                    <form onSubmit={expenseSave}>
+                        <label>Value: <input name="expenseValue" type='number' step='0.01'/></label>
+                        <label>Description: <input name="description" type='text' /></label>
+                        <label>Date: <input name="expenseDate" type='date'  defaultValue={new Date().toISOString().split('T')[0]} /></label>
+                        <label>Type: <select name="expenseType">
+                                <option value="PERSONAL">Personal</option>
+                                <option value="FOOD">Food</option>
+                                <option value="HOUSING">Housing</option>
+                                <option value="TRANSPORTATION">Transport</option>
+                                <option value="HEALTH">Health</option>
+                                <option value="UTILITIES">Utilities</option>
+                                <option value="ENTERTAINMENT">Entertainment</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </label>
+                        <button className='submit'>Add</button>
+                    </form>
+                </div>
+
                 <h3 className='title'>This month expenses</h3>
                 <h1 className='this-month-balance'>{thisMBalance} <span>zł</span></h1>
+
             </div>
             <div className="inside-container">
 
@@ -168,12 +212,6 @@ const MainList = () => {
                 </div>
 
                 <div className='panel right-panel content'>
-
-                    <div className='new-expense'>
-                        <form>
-
-                        </form>
-                    </div>
 
                     <div className="expense-list">
                         {renderExpensesByMonthAndDay()}
