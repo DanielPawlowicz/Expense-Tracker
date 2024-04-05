@@ -10,7 +10,9 @@ class ExpenseService {
     }
 
     // Get all expenses display
-
+    getAllExpenses(){
+        return axios.get(API_URL + "/allExpensesOrdered");
+    }
 
 }
 
