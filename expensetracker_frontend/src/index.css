@@ -1,5 +1,11 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -14,17 +20,30 @@ code {
 
 .container{
   width: 1200px;
+  padding: 0;
+  margin: 0;
 }
 
-.container > h2, h1{
+.heading{
+  padding: 30px 0;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  margin-bottom: 20px;
+}
+
+.heading > h3, h1{
   text-align: center;
 }
 
-.container > h1{
+.heading > h1{
   font-size: 4rem;
+  margin: 0;
 }
 
-.container > h1 span{
+.heading > h1 span{
   font-size: 2.5rem;
 }
 
@@ -44,7 +63,7 @@ code {
 
 
 .month-container{
-  margin-bottom: 30%;;
+  margin-bottom: 100px;
 }
 
 .month-name{
@@ -61,14 +80,17 @@ code {
 }
 
 .day-name{
-  margin-left: 5%;
+  margin-left: 35px;
   color: #444;
 }
 
 table{
-  padding-left: 15%;
+  padding-left: 70px;
+  border-collapse: separate;
+  width: 800px;
 }
 
-tr{
-  padding: 20px;
+td {
+  display: inline-block;
+  margin: 10px 5px;
 }

@@ -93,8 +93,10 @@ const MainList = () => {
   return (
     <>
         <div className='container'>
-                <h2 className='title'>Expense Tracker</h2>
+            <div className="heading">
+                <h3 className='title'>This month expenses</h3>
                 <h1 className='this-month-balance'>{thisMBalance} <span>zł</span></h1>
+            </div>
             <div className="inside-container">
 
                 <div className='panel left-panel controls'>
