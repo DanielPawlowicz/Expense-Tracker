@@ -31,6 +31,61 @@ const MainList = () => {
         });
     };
 
+    // convert month number to month name
+    const getMonthName = (month) => {
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return months[month - 1];
+    };
+
+    // group expenses by month and day
+    const groupExpensesByMonthAndDay = () => {
+        const groupedExpenses = {};
+        allExpensesList.forEach(expense => {
+            const expenseDate = new Date(expense.expenseDate);
+            const month = getMonthName(expenseDate.getMonth() + 1); // Adding 1 to get the correct month index
+            const day = expenseDate.getDate(); // Get day number
+            if (!groupedExpenses[month]) {
+                groupedExpenses[month] = {};
+            }
+            if (!groupedExpenses[month][day]) {
+                groupedExpenses[month][day] = [];
+            }
+            groupedExpenses[month][day].push(expense);
+        });
+        return groupedExpenses;
+    };
+
+    // expenses grouped by month and day
+    const renderExpensesByMonthAndDay = () => {
+        const groupedExpenses = groupExpensesByMonthAndDay();
+        return Object.entries(groupedExpenses).map(([month, days]) => (
+            <div key={month}>
+                <h2>{month}</h2>
+                {Object.entries(days)
+                    .sort(([a], [b]) => b - a) // Sort the days in descending order
+                    .map(([day, expenses]) => (
+                        <div key={day}>
+                            <h3>{day}</h3>
+                            <table>
+                                <tbody>
+                                    {expenses.map(exp => (
+                                        <tr key={exp.id}>
+                                            {/* <td>{exp.expenseDate}</td> */}
+                                            <td>{exp.expenseValue}</td>
+                                            <td>{exp.description}</td>
+                                            <td>{exp.expenseType}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ))
+                }
+            </div>
+        ));
+    };
+
+
 
   return (
     <>
@@ -55,9 +110,7 @@ const MainList = () => {
                 </div>
 
                 <div className="expense-list">
-                    {
-
-                    }
+                    {renderExpensesByMonthAndDay()}
                 </div>
             </div>
         </div>
