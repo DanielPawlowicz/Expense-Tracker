@@ -19,7 +19,7 @@ code {
 }
 
 .container{
-  width: 1200px;
+  width: 1400px;
   padding: 0;
   margin: 0;
 }
@@ -89,7 +89,7 @@ code {
 table{
   padding-left: 100px;
   border-collapse: separate;
-  width: 800px;
+  width: 1000px;
   border-bottom: 0.5px solid #ddd;
 }
 
@@ -103,6 +103,23 @@ td {
 }
 
 .e-descr{
-  width: 400px;
+  width: 600px;
   word-wrap: break-word;
+}
+
+.icon{
+  color: #bbb;
+  margin: -2px;
+}
+
+.icon:hover{
+  color: #333;
+}
+
+tr:hover{
+  background-color: #deedde;
+}
+
+tr:hover .icon{
+  /* color: #999; */
 }

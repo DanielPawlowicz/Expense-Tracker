@@ -1,5 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import ExpenseService from '../service/ExpenseService';
+import { IconButton } from '@mui/material';
+// icons
+import DeleteIcon from '@mui/icons-material/Delete'; // delete
+import EditNoteIcon from '@mui/icons-material/EditNote'; // edit
+import CottageIcon from '@mui/icons-material/Cottage'; // housing
+import BathtubIcon from '@mui/icons-material/Bathtub'; // utilities
+import RestaurantIcon from '@mui/icons-material/Restaurant'; // food
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar'; // transportation
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital'; // health
+import AccessibilityIcon from '@mui/icons-material/Accessibility'; // personal
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports'; // entertainment
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'; // other
+
+
+
+
+
 
 const MainList = () => {
 
@@ -59,6 +76,31 @@ const MainList = () => {
         return groupedExpenses;
     };
 
+
+    // get the icon component based on the expense type
+    const getExpenseIcon = (expenseType) => {
+        switch (expenseType) {
+            case 'HOUSING':
+                return <CottageIcon />;
+            case 'UTILITIES':
+                return <BathtubIcon />;
+            case 'FOOD':
+                return <RestaurantIcon />;
+            case 'TRANSPORTATION':
+                return <DirectionsCarIcon />;
+            case 'HEALTH':
+                return <LocalHospitalIcon />;
+            case 'PERSONAL':
+                return <AccessibilityIcon />;
+            case 'ENTERTAINMENT':
+                return <SportsEsportsIcon />;
+            case 'OTHER':
+                return <MoreHorizIcon />;
+            default:
+                return <MoreHorizIcon />;
+        }
+    };
+
     // expenses grouped by month and day
     const renderExpensesByMonthAndDay = () => {
         const groupedExpenses = groupExpensesByMonthAndDay();
@@ -75,9 +117,18 @@ const MainList = () => {
                                     {expenses.map(exp => (
                                         <tr key={exp.id} className='single-expense'>
                                             <td className='e-value'><b>{exp.expenseValue} </b><span>zł</span></td>
+                                            <td className='e-type'>{getExpenseIcon(exp.expenseType)}</td>
                                             <td className='e-descr'>{exp.description}</td>
-                                            <td className='e-type'>{exp.expenseType}</td>
-                                            <td className='controls'></td>
+                                            <td className='controls'>
+                                                <IconButton className='icnbtn'>
+                                                    <EditNoteIcon className='icon' />
+                                                </IconButton>
+                                                
+                                                <IconButton className='icnbtn'>
+                                                    <DeleteIcon className='icon'/>
+                                                </IconButton>
+                                                
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
