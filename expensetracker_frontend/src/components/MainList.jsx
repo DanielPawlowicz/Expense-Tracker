@@ -63,22 +63,20 @@ const MainList = () => {
     const renderExpensesByMonthAndDay = () => {
         const groupedExpenses = groupExpensesByMonthAndDay();
         return Object.entries(groupedExpenses).map(([month, data]) => (
-            <div key={month}>
-                <h2 className='month-name'>{month} </h2>
-                <h3 className='month-value'>{data.totalValue}</h3>
+            <div key={month} className='month-container'>
+                <h2 className='month-name'>{month} <span className='monthly-value'>{data.totalValue} <span className='zl'>zł</span></span></h2>
                 {Object.entries(data.days)
                     .sort(([a], [b]) => b - a) // Sort the days in descending order
                     .map(([day, expenses]) => (
-                        <div key={day}>
-                            <h3>{day}</h3>
+                        <div key={day} className='day-container'>
+                            <h3 className='day-name'>{day}</h3>
                             <table>
                                 <tbody>
                                     {expenses.map(exp => (
-                                        <tr key={exp.id}>
-                                            {/* <td>{exp.expenseDate}</td> */}
-                                            <td>{exp.expenseValue}</td>
-                                            <td>{exp.description}</td>
-                                            <td>{exp.expenseType}</td>
+                                        <tr key={exp.id} className='single-expense'>
+                                            <td className='e-value'><b>{exp.expenseValue} </b><span>zł</span></td>
+                                            <td className='e-descr'>{exp.description}</td>
+                                            <td className='e-type'>{exp.expenseType}</td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -95,27 +93,25 @@ const MainList = () => {
   return (
     <>
         <div className='container'>
+                <h2 className='title'>Expense Tracker</h2>
+                <h1 className='this-month-balance'>{thisMBalance} <span>zł</span></h1>
+            <div className="inside-container">
 
-            <h2 className='title'>Expense Tracker</h2>
-
-            <div className='panel left-panel controls'>
-                {/* <p>ajdfssssssssssssssssssssssssssssssssssk</p> */}
-            </div>
-
-            <div className='panel right-panel content'>
-
-                <div className="balance">
-                    <h1 className='this-month-balance'>{thisMBalance}</h1>
+                <div className='panel left-panel controls'>
+                    {/* <p>ajdfssssssssssssssssssssssssssssssssssk</p> */}
                 </div>
 
-                <div className='new-expense'>
-                    <form>
+                <div className='panel right-panel content'>
 
-                    </form>
-                </div>
+                    <div className='new-expense'>
+                        <form>
 
-                <div className="expense-list">
-                    {renderExpensesByMonthAndDay()}
+                        </form>
+                    </div>
+
+                    <div className="expense-list">
+                        {renderExpensesByMonthAndDay()}
+                    </div>
                 </div>
             </div>
         </div>

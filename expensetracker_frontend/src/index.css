@@ -1,13 +1,74 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.title{
+  color:#333;
+}
+
+.container{
+  width: 1200px;
+}
+
+.container > h2, h1{
+  text-align: center;
+}
+
+.container > h1{
+  font-size: 4rem;
+}
+
+.container > h1 span{
+  font-size: 2.5rem;
+}
+
+.inside-container{
+  display: flex;
+}
+
+.left-panel{
+  width: 400px;
+  display: flex;
+}
+
+.right-panel{
+  width: 800px;
+  display: flex;
+}
+
+
+.month-container{
+  margin-bottom: 30%;;
+}
+
+.month-name{
+  color: #333;
+  font-size: 2rem;
+}
+
+.monthly-value{
+  font-size: 1.2rem;
+}
+
+.zl{
+  font-size: 1rem;
+}
+
+.day-name{
+  margin-left: 5%;
+  color: #444;
+}
+
+table{
+  padding-left: 15%;
+}
+
+tr{
+  padding: 20px;
 }
