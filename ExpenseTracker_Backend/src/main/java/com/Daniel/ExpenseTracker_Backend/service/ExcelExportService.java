@@ -17,7 +17,7 @@ public class ExcelExportService {
 
             // Nagłówki kolumn
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"ID", "Expense Value", "Description", "Expense Date", "Expense Type"};
+            String[] headers = {"Expense Date", "Expense Value", "Description", "Expense Type"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -27,11 +27,10 @@ public class ExcelExportService {
             int rowNum = 1;
             for (Expense expense : expenses) {
                 Row row = sheet.createRow(rowNum++);
-                row.createCell(0).setCellValue(expense.getId());
+                row.createCell(0).setCellValue(expense.getExpenseDate().toString());
                 row.createCell(1).setCellValue(expense.getExpenseValue());
                 row.createCell(2).setCellValue(expense.getDescription());
-                row.createCell(3).setCellValue(expense.getExpenseDate().toString());
-                row.createCell(4).setCellValue(expense.getExpenseType().toString());
+                row.createCell(3).setCellValue(expense.getExpenseType().toString());
             }
 
             // Zapis do pliku

@@ -72,6 +72,32 @@ code {
   margin-left: 20px;
   cursor: pointer;
   width: 80px;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+}
+
+.export{
+  font-size: 18px;
+  color: #1C6C3F;
+  border: 2px solid #1C6C3F;
+  background-color: white;
+  padding: 7px;
+  border-radius: 10px;
+  margin: 10px;
+  float: right;
+  cursor: pointer;
+  width: 80px;
+  font-weight: bold;
+  letter-spacing: 0.05rem;
+}
+
+.left-panel form{
+  padding: 20px;
+  position: fixed;
+}
+
+.left-panel input{
+  margin: 10px;
 }
 
 
@@ -79,7 +105,7 @@ code {
   position: fixed;
   top: 40vh;
   width: 300px;
-  right: 750px;
+  left: 750px;
   box-shadow: 0 0 40px rgba(0,0,0,0.35);
   padding: 50px 40px;
   /* height: 200px; */
@@ -121,6 +147,7 @@ input{
 .left-panel{
   width: 400px;
   display: flex;
+  /* border-right: 1px solid silver; */
 }
 
 .right-panel{

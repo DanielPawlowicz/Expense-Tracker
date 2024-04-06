@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ExcelExportController {
 
     private final ExpenseServiceImpl expenseService;
@@ -31,6 +33,27 @@ public class ExcelExportController {
     public ExcelExportController(ExpenseServiceImpl expenseService, ExcelExportService excelExportService) {
         this.expenseService = expenseService;
         this.excelExportService = excelExportService;
+    }
+
+    @GetMapping("/exportFromSpecificMonth")
+    public ResponseEntity<Object> exportToExcel(@RequestParam("year") int year, @RequestParam("month") int month) throws IOException {
+        List<Expense> expenses = expenseService.getExpensesByMonthAndYear(year, month);
+        excelExportService.exportToExcel(expenses, "expenses_" + year + "_" + month + ".xlsx");
+
+        String filePath = "expenses_" + year + "_" + month + ".xlsx"; // Ścieżka do wygenerowanego pliku Excel
+        Path path = Paths.get(filePath);
+        byte[] excelData = Files.readAllBytes(path);
+
+        ByteArrayResource resource = new ByteArrayResource(excelData);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=expenses_" + year + "_" + month + ".xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .contentLength(excelData.length)
+                .body(resource);
     }
 
     // create excel file for all
@@ -56,26 +79,6 @@ public class ExcelExportController {
 //        return new ResponseEntity<>("Excel exported successfully", HttpStatus.OK);
 //    }
 
-    @GetMapping("/exportFromSpecificMonth")
-    public ResponseEntity<Object> exportToExcel(@RequestParam("year") int year, @RequestParam("month") int month) throws IOException {
-        List<Expense> expenses = expenseService.getExpensesByMonthAndYear(year, month);
-        excelExportService.exportToExcel(expenses, "expenses_" + year + "_" + month + ".xlsx");
-
-        String filePath = "expenses_" + year + "_" + month + ".xlsx"; // Ścieżka do wygenerowanego pliku Excel
-        Path path = Paths.get(filePath);
-        byte[] excelData = Files.readAllBytes(path);
-
-        ByteArrayResource resource = new ByteArrayResource(excelData);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=expenses_" + year + "_" + month + ".xlsx");
-
-        return ResponseEntity.ok()
-                .headers(headers)
-                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-                .contentLength(excelData.length)
-                .body(resource);
-    }
 
 //    @GetMapping("/export")
 //    public ResponseEntity<Object> exportToExcel() throws IOException {

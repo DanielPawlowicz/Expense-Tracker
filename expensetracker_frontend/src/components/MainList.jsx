@@ -24,6 +24,7 @@ const MainList = () => {
     const [allExpensesList, setAllExpensesList] = useState([]);
     const [editedExpense, setEditedExpense] = useState(null); // State to hold the edited expense details
     const formRef = useRef(null); // Ref for the form element
+    const [exportMonth, setExportMonth] = useState(getCurrentMonthYear()); 
 
 
 
@@ -223,6 +224,43 @@ const MainList = () => {
     };
 
 
+    function getCurrentMonthYear() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Ensure month is two digits
+        return `${year}-${month}`; // Format: YYYY-MM
+    }
+
+    const handleExport = () => {
+        const [year, month] = exportMonth.split('-'); // Split exportMonth into year and month
+        ExpenseService.excelExport(year, month)
+        .then(response => {
+            // Create a blob from the response data
+            const blob = new Blob([response.data], { type: 'application/vnd.ms-excel' });
+    
+            // Create a URL for the blob
+            const url = window.URL.createObjectURL(blob);
+    
+            // Create a link element to initiate the download
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `expenses_${year}_${month}.xlsx`);
+    
+            // Append the link to the body and click it
+            document.body.appendChild(link);
+            link.click();
+    
+            // Clean up
+            window.URL.revokeObjectURL(url);
+          })
+
+            .catch(error => {
+                // Handle error
+                console.error('Export error:', error);
+            });
+    };
+
+
 
   return (
     <>
@@ -259,7 +297,12 @@ const MainList = () => {
             <div className="inside-container">
 
                 <div className='panel left-panel controls'>
-                    {/* <p>ajdfssssssssssssssssssssssssssssssssssk</p> */}
+                    <form >
+                        <h3>Excel Export</h3>
+                        <label>Month: <input type="month" id="exportMonth" name="exportMonth" value={exportMonth} onChange={(e) => setExportMonth(e.target.value)}/></label>
+                        <br/>
+                        <button className='export' type="button" onClick={handleExport}>Export</button>
+                    </form>
                 </div>
 
                 <div className='panel right-panel content'>

@@ -34,6 +34,11 @@ class ExpenseService {
         return axios.put(API_URL + "/editExpense/" + id, expense)
     }
 
+    //export excel
+    excelExport(y, m){
+        return axios.get(API_URL + `/exportFromSpecificMonth?year=${y}&month=${m}`, {responseType: 'blob'});
+    }
+
 }
 
 export default new ExpenseService;
