@@ -13,11 +13,6 @@ import AccessibilityIcon from '@mui/icons-material/Accessibility'; // personal
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'; // entertainment
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'; // other
 
-
-
-
-
-
 const MainList = () => {
 
     const [thisMBalance, setThisMBalance] = useState(0);
@@ -25,8 +20,6 @@ const MainList = () => {
     const [editedExpense, setEditedExpense] = useState(null); // State to hold the edited expense details
     const formRef = useRef(null); // Ref for the form element
     const [exportMonth, setExportMonth] = useState(getCurrentMonthYear()); 
-
-
 
     // fetch the balance from this month when site is loading
     useEffect(() => {
@@ -80,7 +73,6 @@ const MainList = () => {
         });
         return groupedExpenses;
     };
-
 
     // get the icon component based on the expense type
     const getExpenseIcon = (expenseType) => {
@@ -174,12 +166,8 @@ const MainList = () => {
         notification.textContent = message;
         notification.classList.add('show');
     
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 1500); // Adjust the timeout duration as needed (in milliseconds)
+        setTimeout(() => { notification.classList.remove('show'); }, 1500);
     }
-
-
 
 
 // RENDER
