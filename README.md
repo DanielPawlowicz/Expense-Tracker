@@ -1,6 +1,6 @@
 # Expense Tracker
 
-## It is a fullstack web app on Java Spring Boot, React.js and MySQL
+## It is a fullstack web app on Java Spring Boot, React.js and MySQL where tou can manage your personal monthly expenses
 
 ### features
 * Displaying list of expenses grouped by month and day
