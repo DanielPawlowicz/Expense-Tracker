@@ -10,6 +10,14 @@
 * Deleting expenses
 * Exporting the selected month expenses to the Excel file, and downloading it
 
+#### How to set it up locally:
+1. You need to have the JDK 11 or later installed
+2. Run the Xampp Apache and MySQL
+3. Use the MySQL workbench with example database "ytmanager_db.sql"
+4. Run the Java Spring Boot app
+5. Run the Frontend with command "npm start"
+6. Use it in your browser
+
 #### Future features
 * Data visualisation for selected month with charts
 * Comparing statistics to previous months
